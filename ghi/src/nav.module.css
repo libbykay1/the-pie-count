@@ -1,0 +1,21 @@
+.navbarlist {
+    list-style-type: none;
+    text-align: left;
+    padding: 15px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.navitem {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.links {
+    text-decoration: none;
+    color: black;
+}
+
+.links:visited {
+    color: black;
+}

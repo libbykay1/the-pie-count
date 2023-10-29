@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './orders.module.css';
 
 function NewOrder() {
     const timeRef = useRef();
     const inputRef = useRef();
     const [name, setName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [number, setNumber] = useState('');
     const [pickupDate, setPickupDate] = useState('');
     const [pickupTime, setPickupTime] = useState('');
     const navigate = useNavigate();
@@ -15,8 +16,8 @@ function NewOrder() {
         setName(event.target.value);
     };
 
-    const handlePhoneNumberChange = event => {
-        setPhoneNumber(event.target.value);
+    const handleNumberChange = event => {
+        setNumber(event.target.value);
     };
 
     const handlePickupDateChange = event => {
@@ -34,7 +35,7 @@ function NewOrder() {
         const timeDisplay = selectedOption.dataset.display;
         const data = {};
         data.name = name;
-        data.phoneNumber = phoneNumber;
+        data.number = number;
         data.status = 'pending';
         data.pickupDate = pickupDate;
         data.pickupTime = pickupTime;
@@ -51,10 +52,6 @@ function NewOrder() {
         if (response.ok) {
             const newOrder = await response.json();
             const newOrderId = newOrder._id;
-            setName('');
-            setPickupDate('');
-            setPickupTime('');
-            inputRef.current.focus();
             navigate(`/${newOrderId}/edit`)
         };
     };
@@ -65,17 +62,23 @@ function NewOrder() {
     }, []);
 
     return (
-        <>
+        <div className={styles.newordercontainer}>
         <h1>New Order</h1>
         <form onSubmit={handleSubmit} id="new-order">
+            <div className={styles.formfield}>
             <label htmlFor="name">Name:</label>
-            <input ref={inputRef} required value={name} onChange={handleNameChange} placeholder="" type="text" id="name" />
-            <label htmlFor="phone-number">Phone number:</label>
-            <input value={phoneNumber} onChange={handlePhoneNumberChange} placeholder="" type="text" id="phone-number" />
+            <input className={styles.textinput} ref={inputRef} required value={name} onChange={handleNameChange} placeholder="" type="text" id="name" />
+            </div>
+            <div className={styles.formfield}>
+            <label htmlFor="phone-number">Phone # / Shopify order #:</label>
+            <input className={styles.textinput} value={number} onChange={handleNumberChange} placeholder="" type="text" id="phone-number" />
+            </div>
+            <div className={styles.formfield}>
             <label htmlFor="pickup-date">Pickup date</label>
-            <input required value={pickupDate} onChange={handlePickupDateChange} type="date" id="pickup-date" />
+            <input className={styles.textinput} required value={pickupDate} onChange={handlePickupDateChange} type="date" id="pickup-date" />
+            </div>
             <label htmlFor="pickup-time">Pickup time</label>
-            <select ref={timeRef} onChange={handlePickupTimeChange} id="pickup-time">
+            <select className={styles.textinput} ref={timeRef} onChange={handlePickupTimeChange} id="pickup-time">
                 <option value=''>Choose pickup time</option>
                 <option value='10:00' data-display='10 am'>10 am</option>
                 <option value='10:15' data-display='10:15 am'>10:15 am</option>
@@ -109,7 +112,7 @@ function NewOrder() {
                 </select>
             <button>Save</button>
         </form>
-        </>
+        </div>
     )
 };
 

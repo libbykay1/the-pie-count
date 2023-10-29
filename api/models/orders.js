@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: 'Name is required'
     },
-    phoneNumber: {
+    number: {
         type: String
     },
     pickupDate: {
@@ -36,9 +36,6 @@ const orderSchema = new mongoose.Schema({
     },
     status: {
         type: String
-    },
-    shopifyNumber: {
-        type: Number
     },
     collect: {
         type: String

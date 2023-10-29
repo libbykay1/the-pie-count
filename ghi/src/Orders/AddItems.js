@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { DateTime } from 'luxon';
+import styles from './orders.module.css';
 
 function AddItems() {
     const largeRef = useRef();
@@ -452,16 +453,17 @@ function AddItems() {
     }, []);
 
     return (
-        <>
+        <div className={styles.container}>
+            <div>
         <h1>{name}</h1>
-        <div>
+        <div className={styles.orderinfo}>
             {date}, {time}
-            <Popup trigger={<button>Edit</button>} position="right center">
+            <Popup trigger={<button className={styles.otherbutton}>Edit</button>} position="right center">
                 <form onSubmit={editDateTime} id='edit-order'>
                 <label htmlFor="pickup-date">Pickup date</label>
-            <input required value={newDate} onChange={handleNewDateChange} type="date" id="pickup-date" />
+            <input className={styles.textinput} required value={newDate} onChange={handleNewDateChange} type="date" id="pickup-date" />
             <label htmlFor="pickup-time">Pickup time</label>
-            <select ref={timeRef} onChange={handleNewTimeChange} id="pickup-time">
+            <select className={styles.textinput} ref={timeRef} onChange={handleNewTimeChange} id="pickup-time">
                 <option value=''>Choose pickup time</option>
                 <option value='10:00' data-display='10 am'>10 am</option>
                 <option value='10:15' data-display='10:15 am'>10:15 am</option>
@@ -498,13 +500,15 @@ function AddItems() {
             </Popup>
         </div>
         <div>
+            <h2>Add items</h2>
+            <div className={styles.container}></div>
             Quick add:
-            <button onClick={quickAddPumpkin}>Large Pumpkin</button>
-            <button onClick={quickAddApple}>Large Cinnamon Apple</button>
+            <button className={styles.otherbutton} onClick={quickAddPumpkin}>Large Pumpkin</button>
+            <button className={styles.otherbutton} onClick={quickAddApple}>Large Cinnamon Apple</button>
         </div>
         <div>
         <label htmlFor="large-pies">Add large pie: </label>
-            <select ref={largeRef} id="large-pies" onChange={handleItemNameChange}>
+            <select className={styles.textinput} ref={largeRef} id="large-pies" onChange={handleItemNameChange}>
                 <option value=''>Choose a flavor</option>
                 {largePies.map(pie => {
                     return (
@@ -519,7 +523,7 @@ function AddItems() {
             </div>
             <div>
             <label htmlFor="double-crusts">Add double-crust pie: </label>
-            <select ref={doubleRef} id="double-crusts" onChange={handleItemNameChange}>
+            <select className={styles.textinput} ref={doubleRef} id="double-crusts" onChange={handleItemNameChange}>
                 <option value=''>Choose a flavor</option>
                 {doubleCrusts.map(pie => {
                     return (
@@ -535,7 +539,7 @@ function AddItems() {
                 <form onSubmit={createFourpack} id='fourpack-form'>
                     Add fourpack:
                     <label htmlFor="first-flavor"></label>
-            <select ref={smallRef} id="first-flavor" onChange={handleFirstFlavorChange}>
+            <select className={styles.textinput} ref={smallRef} id="first-flavor" onChange={handleFirstFlavorChange}>
                 <option value=''>First flavor</option>
                 {savorys.map(pie => {
                     return (
@@ -552,6 +556,7 @@ function AddItems() {
                     )
                 })}
             </select>
+            <p className={styles.fourpackdropdown}>
             <label htmlFor="second-flavor"></label>
             <select ref={smallRef} id="second-flavor" onChange={handleSecondFlavorChange}>
                 <option value=''>Second flavor</option>
@@ -570,8 +575,10 @@ function AddItems() {
                     )
                 })}
             </select>
+            </p>
+            <p className={styles.fourpackdropdown}>
             <label htmlFor="third-flavor"></label>
-            <select ref={smallRef} id="third-flavor" onChange={handleThirdFlavorChange}>
+            <select className={styles.textinput} ref={smallRef} id="third-flavor" onChange={handleThirdFlavorChange}>
                 <option value=''>Third flavor</option>
                 {savorys.map(pie => {
                     return (
@@ -588,6 +595,8 @@ function AddItems() {
                     )
                 })}
             </select>
+            </p>
+            <p className={styles.fourpackdropdown}>
             <label htmlFor="fourth-flavor"></label>
             <select ref={smallRef} id="fourth-flavor" onChange={handleFourthFlavorChange}>
                 <option value=''>Fourth flavor</option>
@@ -607,11 +616,12 @@ function AddItems() {
                 })}
             </select>
             <button>Add</button>
+            </p>
                 </form>
             </div>
             <div>
             <label htmlFor="brittles">Add brittle: </label>
-            <select ref={brittleRef} id="brittles" onChange={handleItemNameChange}>
+            <select className={styles.textinput} ref={brittleRef} id="brittles" onChange={handleItemNameChange}>
                 <option value=''>Choose a flavor</option>
                 {brittles.map(brittle => {
                     return (
@@ -625,7 +635,7 @@ function AddItems() {
             </div>
             <div>
             <label htmlFor="cookies">Add cookies: </label>
-            <select ref={cookieRef} id="cookies" onChange={handleItemNameChange}>
+            <select className={styles.textinput} ref={cookieRef} id="cookies" onChange={handleItemNameChange}>
                 <option value=''>Choose a flavor</option>
                 {cookies.map(cookie => {
                     return (
@@ -639,7 +649,7 @@ function AddItems() {
             </div>
             <div>
             <label htmlFor="small-pies">Add small pie: </label>
-            <select ref={smallRef} id="small-pies" onChange={handleItemNameChange}>
+            <select className={styles.textinput} ref={smallRef} id="small-pies" onChange={handleItemNameChange}>
                 <option value=''>Choose a flavor</option>
                 {savorys.map(pie => {
                     return (
@@ -659,16 +669,16 @@ function AddItems() {
             <button onClick={addSmallPie}>Add</button>
             </div>
             <div>
-                Add custom item:
                 <form onSubmit={addCustom} id="add-custom">
-                    <label htmlFor="custom-name"></label>
-                    <input value={customName} onChange={handleCustomNameChange} placeholder="Name" id="custom-name" type="text" />
+                    <label htmlFor="custom-name">Add custom item:</label>
+                    <input className={styles.textinput} value={customName} onChange={handleCustomNameChange} placeholder="Name" id="custom-name" type="text" />
                     <label htmlFor="custom-amount"></label>
-                    <input value={customAmount} onChange={handleCustomAmountChange} placeholder="Price" id="custom-amount" type="text" />
+                    <input className={styles.numberinput} value={customAmount} onChange={handleCustomAmountChange} placeholder="Price" id="custom-amount" type="text" />
                     <button>Add</button>
                 </form>
             </div>
-            <div>
+            </div>
+            <div className={styles.orderlistcontainer}>
                 <table>
                     <tbody>
                         {items.map(item => {
@@ -677,6 +687,7 @@ function AddItems() {
                                     <td>{item.name}</td>
                                     <td>
                                         <input
+                                            className={styles.numberinput}
                                             value={item.amount}
                                             onChange={(event) => handleAmountChange(event, item._id)}
                                             type="number"
@@ -684,7 +695,7 @@ function AddItems() {
                                         />
                                         <button onClick={editAmount}>Update</button>
                                     </td>
-                                    <td>${item.price * item.amount || item.price}</td>
+                                    <td className={styles.itemprice}>${item.price * item.amount || item.price}</td>
                                     <td>
                                         <button onClick={() => removeItem(item._id)}>Delete</button>
                                     </td>
@@ -692,23 +703,21 @@ function AddItems() {
                             )
                         })}
                         <tr>
-                            <td>Total</td>
+                            <td className={styles.bold}>Total</td>
                             <td></td>
-                            <td>${costTotal}</td>
+                            <td className={styles.bold}>${costTotal}</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div>
                 <form onSubmit={editCollect} id='collect-form'>
-               <select onChange={handleCollectChange} id='collect'>
+               <select className={styles.collectdropdown} onChange={handleCollectChange} id='collect'>
                 <option value=''>Collect?</option>
                 <option value={costTotal}>Collect ${costTotal}</option>
                 <option value='otherAmount'>Collect other amount</option>
                 <option value='paid'>Mark as paid</option>
                </select>
                {collect == 'otherAmount' && (
-               <input onChange={setOtherAmount} type='text' placeholder="amount" id="other-amount"/>)}
+               <input className={styles.numberinput} onChange={setOtherAmount} type='text' placeholder="amount" id="other-amount"/>)}
                <button>Save</button>
                </form>
                {collectSaved && (
@@ -717,7 +726,7 @@ function AddItems() {
                     </div>
                )}
             </div>
-        </>
+        </div>
     )
 };
 

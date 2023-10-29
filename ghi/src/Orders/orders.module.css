@@ -1,0 +1,92 @@
+.container {
+    padding: 0px 50px;
+    display: flex;
+}
+
+.table {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+.tabledata {
+    border: 1px solid;
+    padding: 10px;
+}
+
+.rightcontainer {
+    padding: 0px 50px;
+}
+
+.newordercontainer {
+    padding: 0px 50px;
+}
+
+.textinput {
+    margin: 0px 5px;
+}
+
+.formfield {
+    margin: 10px 0px;
+}
+
+.orderstabledata {
+    border: 1px solid;
+    padding: 5px;
+}
+
+.orderinfo {
+    padding: 10px 0px;
+}
+
+.bold {
+    font-weight: bold;
+    padding: 0px 20px;
+}
+
+.itemstabledata {
+    border-bottom: 1px solid;
+    padding: 5px;
+}
+
+.button {
+    margin: 10px 10px 15px 0px;
+    padding: 5px;
+}
+
+.links {
+    text-decoration: none;
+    color: black;
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.links:visited {
+    color: black;
+}
+
+.otherbutton {
+    margin: 10px;
+}
+
+.fourpackdropdown {
+    margin: 0px 0px 0px 100px;
+}
+
+.orderlistcontainer {
+    padding: 100px;
+}
+
+.numberinput {
+    margin: 0px 5px;
+    width: 50px;
+}
+
+.itemprice {
+    padding: 0px 20px;
+}
+
+.collectdropdown {
+    margin: 30px 5px;
+    font-size: 18px;
+}

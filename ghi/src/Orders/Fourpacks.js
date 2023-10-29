@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from './orders.module.css';
 
 function Fourpacks() {
     const [orders, setOrders] = useState([]);
@@ -28,8 +29,15 @@ function Fourpacks() {
     }, []);
 
     return (
-        <>
-            <table>
+        <div className={styles.container}>
+            <div>
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th className={styles.tabledata}>Order Name</th>
+                        <th className={styles.tabledata}>Flavors</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {orders
                         .filter(order => order.items.some(item => item.flavors))
@@ -39,31 +47,39 @@ function Fourpacks() {
                                 .filter(item => item.flavors)
                                 .map(item => (
                                     <tr key={item._id}>
-                                        <td>
+                                        <td className={styles.tabledata}>
                                             <a href={url}>{order.name}</a>
                                         </td>
-                                        <td>
-                                            {item.flavors}
+                                        <td className={styles.tabledata}>
+                                            {item.amount}x {item.flavors}
                                         </td>
-                                        <td>x{item.amount}</td>
                                     </tr>
                                 ));
                         })}
                 </tbody>
             </table>
-            <table>
+            </div>
+            <div className={styles.rightcontainer}>
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th className={styles.tabledata}>Flavor</th>
+                        <th  className={styles.tabledata}>Total</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {counts.map(flavor => {
                         return (
                             <tr key={flavor._id}>
-                                <td>{flavor._id}</td>
-                                <td>{flavor.count}</td>
+                                <td className={styles.tabledata}>{flavor._id}</td>
+                                <td className={styles.tabledata}>{flavor.count}</td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
-        </>
+            </div>
+        </div>
     );
                     }
 

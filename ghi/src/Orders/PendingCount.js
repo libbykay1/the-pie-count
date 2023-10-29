@@ -1,4 +1,5 @@
 import React,  { useState, useEffect } from 'react';
+import styles from './orders.module.css';
 
 function PendingCount() {
     const [items, setItems] = useState([]);
@@ -18,20 +19,26 @@ function PendingCount() {
     }, []);
 
     return (
-        <>
-        <table>
+        <div className={styles.container}>
+        <table className={styles.table}>
+            <thead>
+                <tr>
+                    <th className={styles.tabledata}>Product</th>
+                    <th className={styles.tabledata}>Count</th>
+                </tr>
+            </thead>
             <tbody>
                 {items.map(item => {
                     return (
                         <tr key={item._id}>
-                            <td>{item._id}</td>
-                            <td>{item.count}</td>
+                            <td className={styles.tabledata}>{item._id}</td>
+                            <td className={styles.tabledata}>{item.count}</td>
                         </tr>
                     )
                 })}
             </tbody>
         </table>
-        </>
+        </div>
     )
 
 };

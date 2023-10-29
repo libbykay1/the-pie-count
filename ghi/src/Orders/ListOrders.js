@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DateTime } from 'luxon';
+import styles from './orders.module.css';
 
 function ListOrders() {
     const { date } = useParams();
@@ -40,24 +41,24 @@ useEffect(() => {
 }, [date]);
 
 return (
-    <>
+    <div className={styles.newordercontainer}>
     <h1>{formattedDate}</h1>
-    <table>
+    <table className={styles.table}>
         <tbody>
             {orders.map(order => {
                 const url = `http://localhost:3000/${order._id}`
                 return (
                     <tr key={order._id}>
-                        <td>
+                        <td className={styles.orderstabledata}>
                             <a href={url}>{order.name}</a>
                         </td>
-                        <td>
+                        <td className={styles.orderstabledata}>
                             {order.displayTime}
                         </td>
-                        <td>
+                        <td className={styles.orderstabledata}>
                             {order.status}
                         </td>
-                        <td>
+                        <td className={styles.orderstabledata}>
                             <button onClick={() => deleteOrder(order._id)}>Delete</button>
                         </td>
                     </tr>
@@ -65,7 +66,7 @@ return (
             })}
         </tbody>
     </table>
-    </>
+    </div>
 )
 
 };

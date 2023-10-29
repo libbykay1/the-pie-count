@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DateTime } from 'luxon';
+import styles from './orders.module.css';
 
 function ViewOrder() {
     const navigate = useNavigate();
     const { id } = useParams();
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
+    const [number, setNumber] = useState('');
     const [date, setDate] = useState('');
     const [dateObject, setDateObject] = useState('');
     const [time, setTime] = useState('');
-    const [shopify, setShopify] = useState('');
     const [collect, setCollect] = useState('');
     const [items, setItems] = useState([]);
     const [status, setStatus] = useState('');
@@ -28,8 +28,7 @@ function ViewOrder() {
             setDate(formatted);
             setTime(data.displayTime);
             setItems(data.items);
-            setPhone(data.phoneNumber);
-            setShopify(data.shopifyNumber);
+            setNumber(data.number);
             setCollect(data.collect);
             setStatus(data.status);
         };
@@ -63,27 +62,29 @@ function ViewOrder() {
     }, []);
 
     return (
-        <>
+        <div className={styles.newordercontainer}>
         <h1>{name}</h1>
-        {shopify != null && (<div>
-            Shopify number: {shopify}</div>)}
-        {phone != null && (<div>
-            Phone number: {phone}</div>)}
-        {collect != null && collect != 'paid' &&(<div>
-            Collect ${collect}</div>)}
-        {collect == 'paid' &&(<div>
-            Paid</div>)}
+        <div className={styles.orderinfo}>
+        {number != null && (<div>
+            Phone # / Shopify order #: {number}</div>)}
+        </div>
         <div>
+        {collect != null && collect != 'paid' &&(<div className={styles.bold}>
+            Collect ${collect}</div>)}
+        {collect == 'paid' &&(<div className={styles.bold}>
+            Paid</div>)}
+        </div>
+        <div className={styles.orderinfo}>
             Pickup: {date}, {time}
         </div>
         <div>
-                <table>
+                <table className={styles.table}>
                     <tbody>
                         {items.map(item => {
                             return (
                                 <tr key={item._id}>
-                                    <td>{item.amount}x</td>
-                                    <td>{item.name}</td>
+                                    <td className={styles.itemstabledata}> {item.amount}x</td>
+                                    <td className={styles.itemstabledata}>{item.name}</td>
                                 </tr>
                             )
                         })}
@@ -92,8 +93,8 @@ function ViewOrder() {
             </div>
             {status == 'pending' && (
             <div>
-                <button onClick={orderReady}>Ready?</button>
-                <button onClick={orderPickedup}>Picked up ✓</button>
+                <button className={styles.button} onClick={orderReady}>Ready?</button>
+                <button className={styles.button} onClick={orderPickedup}>Picked up ✓</button>
             </div>
             )}
                         {status == 'ready' && (
@@ -107,9 +108,9 @@ function ViewOrder() {
             </div>
             )}
             <div>
-                <a href={`http://localhost:3000/${id}/edit`}>Edit order</a>
+                <a className={styles.links} href={`http://localhost:3000/${id}/edit`}>Edit order</a>
             </div>
-        </>
+        </div>
     )
 };
 
